@@ -14,3 +14,10 @@ If you are me or you'd like to give me root access to your server, do this::
     $ python bootstrap.py
     $ bin/buildout
     $ bin/fab -H <host> deploy
+
+PEP8
+----
+
+Also for kicks, you can run pep8 on the fabfile::
+
+    $ bin/pep8 fabfile.py
