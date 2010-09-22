@@ -31,6 +31,7 @@ def copy_pub_key():
 def install_developer():
     run('aptitude -y install build-essential')
     run('aptitude -y install subversion')
+    run('aptitude -y install zlib1g-dev')
     
 
 def install_python():
