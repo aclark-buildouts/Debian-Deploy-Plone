@@ -13,7 +13,7 @@ def deploy():
 def update_packages():
     run('aptitude update')
 
-    # XXX What do I do when apitude asks "harder" questions? i.e. How
+    # XXX What do I do when aptitude asks "harder" questions? i.e. How
     # does Fabric handle more complex interactions (with remote hosts)
     # a la (TCL) Expect? My understanding is that it currently does not.
     run('aptitude -y safe-upgrade')
