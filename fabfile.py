@@ -52,3 +52,4 @@ def install_plone():
     put('bootstrap.py', '/srv/plone')
     run('cd /srv/plone; /root/python/python-2.6/bin/python2.6 bootstrap.py -d')
     run('cd /srv/plone; bin/buildout')
+    run('cd /srv/plone; bin/supervisord')
