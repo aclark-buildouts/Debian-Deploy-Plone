@@ -4,13 +4,18 @@ from fabric.api import env, put, run
 env.user = 'root'
 env.warn_only = True
 
+PACKAGES = "apache2 build-essential subversion zlib1g-dev"
+
+MODULE_CONFS = ('proxy.conf', 'proxy.load', 'proxy_http.load', 'rewrite.load')
+
 
 def deploy():
-    update_packages()
     copy_pub_key()
-    install_developer()
+    update_packages()
+    install_packages()
     install_python()
     install_plone()
+    configure_apache()
 
 
 def update_packages():
@@ -28,11 +33,9 @@ def copy_pub_key():
     put('id_rsa.pub', '/root/.ssh/authorized_keys')
 
 
-def install_developer():
-    run('aptitude -y install build-essential')
-    run('aptitude -y install subversion')
-    run('aptitude -y install zlib1g-dev')
-    
+def install_packages():
+    run('aptitude -y install %s' % PACKAGES)
+
 
 def install_python():
     run('aptitude -y install python')
@@ -49,7 +52,18 @@ def install_python():
 def install_plone():
     run('mkdir /srv/plone')
     put('plone.cfg', '/srv/plone/buildout.cfg')
-    put('bootstrap.py', '/srv/plone')
+    put('site.cfg', '/srv/plone/plonesite.cfg')
+    put('bootstrap.py', '/srv/plone/bootstrap.py')
     run('cd /srv/plone; /root/python/python-2.6/bin/python2.6 bootstrap.py -d')
     run('cd /srv/plone; bin/buildout')
+    run('chown -R www-data:www-data /srv/plone')
     run('cd /srv/plone; bin/supervisord')
+    run('cd /srv/plone; bin/buildout -c plonesite.cfg')
+
+
+def configure_apache():
+    put('rewrite.conf', '/etc/apache2/conf.d')
+    for conf in MODULE_CONFS:
+        run('cd /etc/apache2/mods-enabled')
+        run('ln -sf ../mods-available/%s' % conf)
+    run('/etc/init.d/apache2 restart')
