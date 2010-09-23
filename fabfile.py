@@ -4,8 +4,13 @@ from fabric.api import env, put, run
 env.user = 'root'
 env.warn_only = True
 
-MODULE_CONFS = ('proxy.conf', 'proxy.load', 'proxy_http.load', 'rewrite.load')
+FORM_VARS = ('form.submitted:boolean=True',
+    'extension_ids:list=plonetheme.sunburst:default',
+    'setup_content:boolean=true')
+MODULE_CONFS = ('less', 'proxy.conf', 'proxy.load', 'proxy_http.load',
+    'rewrite.load')
 PACKAGES = "apache2 build-essential libssl-dev subversion zlib1g-dev"
+
 
 def deploy():
     copy_pub_key()
@@ -46,19 +51,22 @@ def install_python():
 def install_plone():
     run('mkdir /srv/plone')
     put('plone.cfg', '/srv/plone/buildout.cfg')
-    put('site.cfg', '/srv/plone/plonesite.cfg')
     put('bootstrap.py', '/srv/plone/bootstrap.py')
     put('rc.local', '/etc/rc.local')
     run('cd /srv/plone; /root/python/python-2.6/bin/python2.6 bootstrap.py -d')
     run('cd /srv/plone; bin/buildout')
     run('chown -R www-data:www-data /srv/plone')
     run('cd /srv/plone; sudo -u www-data bin/supervisord')
-    run('cd /srv/plone; bin/buildout -c plonesite.cfg')
+    create_site()
+
+
+def create_site():
+    url = 'http://127.0.0.1:8080/@@plone-addsite?site_id=Plone'
+    run('curl -u admin:admin -d %s %s' % (' -d '.join(FORM_VARS), url))
 
 
 def configure_apache():
-    put('rewrite.conf', '/etc/apache2/conf.d')
+    put('000-default', '/etc/apache2/sites-enabled')
     for conf in MODULE_CONFS:
-        run('cd /etc/apache2/mods-enabled')
-        run('ln -sf ../mods-available/%s' % conf)
+        run('cd /etc/apache2/mods-enabled;ln -sf ../mods-available/%s' % conf)
     run('/etc/init.d/apache2 restart')
