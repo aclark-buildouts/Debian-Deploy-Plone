@@ -5,7 +5,7 @@ env.user = 'root'
 env.warn_only = True
 
 MODULE_CONFS = ('proxy.conf', 'proxy.load', 'proxy_http.load', 'rewrite.load')
-PACKAGES = "apache2 build-essential subversion zlib1g-dev"
+PACKAGES = "apache2 build-essential libssl-dev subversion zlib1g-dev"
 
 def deploy():
     copy_pub_key()
