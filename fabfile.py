@@ -54,6 +54,7 @@ def install_plone():
     put('plone.cfg', '/srv/plone/buildout.cfg')
     put('site.cfg', '/srv/plone/plonesite.cfg')
     put('bootstrap.py', '/srv/plone/bootstrap.py')
+    put('rc.local', '/etc/rc.local')
     run('cd /srv/plone; /root/python/python-2.6/bin/python2.6 bootstrap.py -d')
     run('cd /srv/plone; bin/buildout')
     run('chown -R www-data:www-data /srv/plone')
