@@ -4,10 +4,8 @@ from fabric.api import env, put, run
 env.user = 'root'
 env.warn_only = True
 
-PACKAGES = "apache2 build-essential subversion zlib1g-dev"
-
 MODULE_CONFS = ('proxy.conf', 'proxy.load', 'proxy_http.load', 'rewrite.load')
-
+PACKAGES = "apache2 build-essential subversion zlib1g-dev"
 
 def deploy():
     copy_pub_key()
@@ -20,10 +18,6 @@ def deploy():
 
 def update_packages():
     run('aptitude update')
-
-    # XXX What do I do when aptitude asks "harder" questions? i.e. How
-    # does Fabric handle more complex interactions (with remote hosts)
-    # a la (TCL) Expect? My understanding is that it currently does not.
     run('aptitude -y safe-upgrade')
 
 
