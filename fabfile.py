@@ -52,7 +52,7 @@ def install_plone():
     run('cd /srv/plone; /root/python/python-2.6/bin/python2.6 bootstrap.py -d')
     run('cd /srv/plone; bin/buildout')
     run('chown -R www-data:www-data /srv/plone')
-    run('cd /srv/plone; bin/supervisord')
+    run('cd /srv/plone; sudo -u www-data bin/supervisord')
     run('cd /srv/plone; bin/buildout -c plonesite.cfg')
 
 
