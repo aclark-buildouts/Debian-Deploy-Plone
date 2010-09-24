@@ -1,4 +1,4 @@
 <rules xmlns="http://namespaces.plone.org/xdv">
-    <copy content="//div[@id='content-wrapper']"
+    <copy content="//div[@id='content']"
           theme="//div[@id='content']"/>
 </rules>
