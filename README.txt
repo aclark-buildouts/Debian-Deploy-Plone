@@ -15,7 +15,7 @@ If you are me (or you'd like to give me root access to your server) do this::
     $ bin/buildout
     $ bin/fab -H <host> deploy
 
-But seriously… I created this deployment package for me. If it is useful to
-you, please feel free to use it (just edit or remove the id_rsa.pub file first).
-If you find it really useful, you may donate a little something by clicking on
-the donate link (thanks GitHub for making this so easy!).
+But seriously… I created this deployment package for me. If you find it
+useful, please feel free to use it (just edit or remove the id_rsa.pub file first).
+If you find it really useful, you may donate a little something (by clicking on the donation link in the upper 
+right hand corner of this page, thanks GitHub for making it so easy!)
