@@ -73,11 +73,11 @@ def configure_apache():
     run('mkdir /var/www/static')
     for conf in MODULE_CONFS:
         run('cd /etc/apache2/mods-enabled;ln -sf ../mods-available/%s' % conf)
-    install_xdv()
+    install_html_xslt()
     run('/etc/init.d/apache2 restart')
 
 
-def install_xdv():
+def install_html_xslt():
     url = 'http://html-xslt.googlecode.com/files/'
     url += 'mod-transform-html-xslt-2p2.tgz'
     run('wget %s' % url)
