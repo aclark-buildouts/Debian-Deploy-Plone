@@ -49,6 +49,7 @@ def install_python():
 
 
 def install_plone():
+    from time import sleep
     run('mkdir /srv/plone')
     put('plone.cfg', '/srv/plone/buildout.cfg')
     put('bootstrap.py', '/srv/plone/bootstrap.py')
@@ -68,6 +69,7 @@ def create_site():
 
 def configure_apache():
     put('000-default', '/etc/apache2/sites-enabled')
+    run('mkdir /var/www/static')
     for conf in MODULE_CONFS:
         run('cd /etc/apache2/mods-enabled;ln -sf ../mods-available/%s' % conf)
     run('/etc/init.d/apache2 restart')
