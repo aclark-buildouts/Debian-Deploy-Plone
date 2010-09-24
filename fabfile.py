@@ -57,6 +57,7 @@ def install_plone():
     run('cd /srv/plone; bin/buildout')
     run('chown -R www-data:www-data /srv/plone')
     run('cd /srv/plone; sudo -u www-data bin/supervisord')
+    sleep(5)
     create_site()
 
 
