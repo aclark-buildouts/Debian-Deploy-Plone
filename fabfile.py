@@ -9,7 +9,8 @@ FORM_VARS = ('form.submitted:boolean=True',
     'setup_content:boolean=true')
 MODULE_CONFS = ('less', 'proxy.conf', 'proxy.load', 'proxy_http.load',
     'rewrite.load')
-PACKAGES = "apache2 build-essential libssl-dev subversion zlib1g-dev"
+PACKAGES = "apache2 apache2-dev build-essential libssl-dev subversion "
+PACKAGES += "zlib1g-dev"
 
 
 def deploy():
@@ -72,4 +73,13 @@ def configure_apache():
     run('mkdir /var/www/static')
     for conf in MODULE_CONFS:
         run('cd /etc/apache2/mods-enabled;ln -sf ../mods-available/%s' % conf)
+    install_xdv()
     run('/etc/init.d/apache2 restart')
+
+
+def install_xdv():
+    url = 'http://html-xslt.googlecode.com/files/'
+    url += 'mod-transform-html-xslt-2p2.tgz'
+    run('wget %s' % url)
+    run('tar zxvf mod-transform-html-xslt-2p2.tgz')
+    run('cd mod-transform-html-xslt-2p2; ./configure; make; make install')

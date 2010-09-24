@@ -1,3 +1,6 @@
+
+LoadModule transform_module /usr/lib/apache2/modules/mod_transform.so
+
 <VirtualHost *:80>
     ServerAdmin aclark@aclark.net
     
@@ -43,6 +46,7 @@
         Allow from all
     </Proxy>
     RewriteEngine On
+    RewriteRule ^/static - [PT]
     RewriteRule ^(.*) http://127.0.0.1:8080/VirtualHostBase/http/%{HTTP_HOST}:80/Plone/VirtualHostRoot/$1 [P,L]
 
     # Customize proxy error
