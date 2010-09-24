@@ -3,7 +3,7 @@ Introduction
 ============
 
 Deploy client sites post-Debian virtual machine creation (to make my life and hopefully
-yours too easier).
+your life easier).
 
 Install
 -------
