@@ -1,4 +1,10 @@
 <rules xmlns="http://namespaces.plone.org/xdv">
     <copy content="//div[@id='content']"
           theme="//div[@id='content']"/>
+    <copy content="//a[@id='portal-logo']"
+          theme="//div[@id='logo']"/>
+    <copy content="//ul[@id='portal-globalnav']"
+          theme="//div[@id='menu']"/>
+    <copy content="//div[@id='portal-column-one']"
+          theme="//div[@id='sidebar']"/>
 </rules>
