@@ -2,8 +2,7 @@
 Introduction
 ============
 
-Deploy client sites post-Debian virtual machine creation (to make my life and hopefully
-your life easier).
+Deploy Plone to Debian (to make my life easier and hopefully yours too).
 
 Install
 -------
@@ -20,3 +19,10 @@ useful, please feel free to use it (just edit or remove the id_rsa.pub file firs
 If you find it really useful, please give something back (by clicking on the
 donation link in the upper right hand corner of this page, thanks GitHub for making
 it so easy!)
+
+Issues
+------
+
+- Currently you must run ``aptitude update`` once by hand. Looking into fixing
+  this with pexpect (Fabric does not seem to handle complex interactions
+  well).
