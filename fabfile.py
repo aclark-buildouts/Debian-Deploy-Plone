@@ -9,8 +9,8 @@ FORM_VARS = ('form.submitted:boolean=True',
     'setup_content:boolean=true')
 MODULE_CONFS = ('less', 'proxy.conf', 'proxy.load', 'proxy_http.load',
     'rewrite.load')
-PACKAGES = "apache2 apache2-dev build-essential libssl-dev subversion "
-PACKAGES += "zlib1g-dev"
+PACKAGES = "apache2 apache2-dev build-essential libssl-dev libxslt-dev subversion "
+PACKAGES += "unzip zlib1g-dev"
 
 
 def deploy():
@@ -61,12 +61,17 @@ def install_plone():
     run('cd /srv/plone; sudo -u www-data bin/supervisord')
     sleep(5)
     create_site()
+    install_theme()
 
 
 def create_site():
     url = 'http://127.0.0.1:8080/@@plone-addsite?site_id=Plone'
     run('curl -u admin:admin -d %s %s' % (' -d '.join(FORM_VARS), url))
 
+
+def install_theme():
+    put('theme.zip', 'theme.zip')
+    run('cd /srv/plone; unzip -o /root/theme.zip')
 
 def configure_apache():
     put('000-default', '/etc/apache2/sites-enabled')
