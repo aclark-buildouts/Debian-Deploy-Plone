@@ -62,5 +62,8 @@ LoadModule transform_module /usr/lib/apache2/modules/mod_transform.so
     <LocationMatch "/">
         FilterChain THEME
     </LocationMatch>
+    <Location "/static">
+        FilterChain !
+    </Location>
 
 </VirtualHost>

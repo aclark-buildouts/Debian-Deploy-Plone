@@ -1,5 +1,5 @@
 # A work in progress
-from fabric.api import env, put, run
+from fabric.api import env, local, put, run
 
 env.user = 'root'
 env.warn_only = True
@@ -7,10 +7,10 @@ env.warn_only = True
 FORM_VARS = ('form.submitted:boolean=True',
     'extension_ids:list=plonetheme.sunburst:default',
     'setup_content:boolean=true')
-MODULE_CONFS = ('less', 'proxy.conf', 'proxy.load', 'proxy_http.load',
-    'rewrite.load')
-PACKAGES = "apache2 apache2-dev build-essential libssl-dev libxslt-dev subversion "
-PACKAGES += "unzip zlib1g-dev"
+MODULE_CONFS = ('filter.load', 'proxy.conf', 'proxy.load',
+    'proxy_http.load', 'rewrite.load')
+PACKAGES = "apache2 apache2-dev build-essential less libssl-dev libxslt-dev "
+PACKAGES += "rsync subversion unzip zlib1g-dev"
 
 
 def deploy():
@@ -70,8 +70,11 @@ def create_site():
 
 
 def install_theme():
+    args = '-av --partial --progress --delete'
+    local('zip -r theme.zip theme')
     put('theme.zip', 'theme.zip')
     run('cd /srv/plone; unzip -o /root/theme.zip')
+    run('rsync %s /srv/plone/theme/perfectblemish/ /var/www/static/' % args)
 
 
 def configure_apache():
