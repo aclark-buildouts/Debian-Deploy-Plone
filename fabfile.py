@@ -56,12 +56,12 @@ def install_plone():
     put('bootstrap.py', '/srv/plone/bootstrap.py')
     put('rc.local', '/etc/rc.local')
     run('cd /srv/plone; /root/python/python-2.6/bin/python2.6 bootstrap.py -d')
+    install_theme()
     run('cd /srv/plone; bin/buildout')
     run('chown -R www-data:www-data /srv/plone')
     run('cd /srv/plone; sudo -u www-data bin/supervisord')
     sleep(5)
     create_site()
-    install_theme()
 
 
 def create_site():
@@ -72,6 +72,7 @@ def create_site():
 def install_theme():
     put('theme.zip', 'theme.zip')
     run('cd /srv/plone; unzip -o /root/theme.zip')
+
 
 def configure_apache():
     put('000-default', '/etc/apache2/sites-enabled')
