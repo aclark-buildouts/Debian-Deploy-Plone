@@ -16,9 +16,6 @@ If you are me (or you'd like to give me root access to your server) do this::
 
 But seriously… I created this deployment package for me. If you find it
 useful, please feel free to use it (just edit or remove the id_rsa.pub file first).
-If you find it really useful, please give something back (by clicking on the
-donation link in the upper right hand corner of this page, thanks GitHub for making
-it so easy!)
 
 Issues
 ------
