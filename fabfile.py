@@ -10,7 +10,7 @@ FORM_VARS = ('form.submitted:boolean=True',
 MODULE_CONFS = ('filter.load', 'proxy.conf', 'proxy.load',
     'proxy_http.load', 'rewrite.load')
 PACKAGES = "apache2 apache2-dev build-essential less libjpeg62 libjpeg62-dev libpng "
-PACKAGES += "libpng-dev libssl-dev libxslt-dev "
+PACKAGES += "libpng-dev libssl-dev "
 PACKAGES += "rsync subversion unzip zlib1g-dev"
 
 
@@ -83,13 +83,4 @@ def configure_apache():
     run('mkdir /var/www/static')
     for conf in MODULE_CONFS:
         run('cd /etc/apache2/mods-enabled;ln -sf ../mods-available/%s' % conf)
-    install_html_xslt()
     run('/etc/init.d/apache2 restart')
-
-
-def install_html_xslt():
-    url = 'http://html-xslt.googlecode.com/files/'
-    url += 'mod-transform-html-xslt-2p2.tgz'
-    run('wget %s' % url)
-    run('tar zxvf mod-transform-html-xslt-2p2.tgz')
-    run('cd mod-transform-html-xslt-2p2; ./configure; make; make install')
