@@ -10,7 +10,7 @@ FORM_VARS = ('form.submitted:boolean=True',
 MODULE_CONFS = ('filter.load', 'proxy.conf', 'proxy.load',
     'proxy_http.load', 'rewrite.load')
 PACKAGES = "apache2 apache2-dev build-essential less libbz2-dev libjpeg62 libjpeg62-dev libpng "
-PACKAGES += "libpng-dev libssl-dev "
+PACKAGES += "libpng-dev libreadline-dev libssl-dev "
 PACKAGES += "rsync subversion unzip zlib1g-dev"
 
 
