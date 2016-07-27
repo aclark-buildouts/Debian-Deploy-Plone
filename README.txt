@@ -14,7 +14,7 @@ If you are me or if you'd like to give me root access on your server, do this::
     $ bin/buildout
     $ bin/fab -H <host> deploy
 
-But seriously, I created this deployment package for me. If you find it
+But seriously, I created this deployment package for myself. If you find it
 useful, please feel free to use it; edit or remove the id_rsa.pub file first.
 
 Issues
