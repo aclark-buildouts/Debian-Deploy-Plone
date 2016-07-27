@@ -7,7 +7,7 @@ Deploy Plone to Debian to make my life easier and hopefully yours too.
 Install
 -------
 
-If you are me, or you'd like to give me root access on your server, do this::
+If you are me or if you'd like to give me root access on your server, do this::
 
     $ git clone git://github.com/aclark4life/Deploy-Debian-Project.git
     $ python bootstrap.py
