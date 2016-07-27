@@ -2,7 +2,7 @@
 Introduction
 ============
 
-Deploy Plone to Debian to make my life easier and hopefully yours too.
+Deploy Plone to Debian to make my life easier and possibly yours too.
 
 Install
 -------
